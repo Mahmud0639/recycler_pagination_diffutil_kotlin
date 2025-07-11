@@ -94,9 +94,14 @@ class JuiceActivity : AppCompatActivity() {
                     items.clear()
                 }
 
-                items.addAll(juiceItems)
+//                items.addAll(juiceItems)
+//
+//                juiceAdapter.notifyDataSetChanged()
 
-                juiceAdapter.notifyDataSetChanged()
+                val mItems = items.clone() as ArrayList<JuiceModel>
+                mItems.addAll(juiceItems)
+                juiceAdapter.updateJuiceItems(mItems)
+
                 binding.progressBar.visibility = View.GONE
                 binding.swipeRefresh.isRefreshing = false
             }

@@ -2,6 +2,7 @@ package com.manuni.hello_world.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.manuni.hello_world.databinding.JuiceItemsBinding
@@ -27,6 +28,14 @@ class JuiceAdapter(var items: ArrayList<JuiceModel>):RecyclerView.Adapter<JuiceA
         binding.juiceName.text = item.juiceName
         binding.ingredients.text = item.ingredientsOne + item.ingredientsTwo + item.ingredientsThree + item.ingredientsFour
         binding.price.text = item.price
+    }
+
+    fun updateJuiceItems(newItems: ArrayList<JuiceModel>){
+        val juiceDiff = JuiceDiffUtil(this.items,newItems)
+        val diffResult = DiffUtil.calculateDiff(juiceDiff)
+        this.items.clear()
+        this.items.addAll(newItems)
+        diffResult.dispatchUpdatesTo(this)
     }
 
 

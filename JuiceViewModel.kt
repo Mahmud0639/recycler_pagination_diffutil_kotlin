@@ -60,6 +60,7 @@ class JuiceViewModel : ViewModel() {
             arrayListOf(
 
                 JuiceModel(
+                    1,
                     "Mint Lemonade - page 1",
                     "Chilled Soda",
                     "Mint Leaves",
@@ -69,6 +70,7 @@ class JuiceViewModel : ViewModel() {
                 ),
 
                 JuiceModel(
+                    2,
                     "Tamarind Cooler - page 1",
                     "Cold Water",
                     "Tamarind Pulp",
@@ -78,6 +80,7 @@ class JuiceViewModel : ViewModel() {
                 ),
 
                 JuiceModel(
+                    3,
                     "Rose Shorbot - page 1",
                     "Chilled Milk",
                     "Rose Syrup",
@@ -87,6 +90,7 @@ class JuiceViewModel : ViewModel() {
                 ),
 
                 JuiceModel(
+                    4,
                     "Cucumber Mint - page 1",
                     "Cold Water",
                     "Cucumber Juice",
@@ -96,6 +100,7 @@ class JuiceViewModel : ViewModel() {
                 ),
 
                 JuiceModel(
+                    5,
                     "Orange Fizz - page 1",
                     "Soda Water",
                     "Orange Juice",
@@ -105,6 +110,7 @@ class JuiceViewModel : ViewModel() {
                 ),
 
                 JuiceModel(
+                    6,
                     "Ginger Lemonade - page 1",
                     "Chilled Water",
                     "Ginger Juice",
@@ -114,6 +120,7 @@ class JuiceViewModel : ViewModel() {
                 ),
 
                 JuiceModel(
+                    7,
                     "Aam Panna - page 1",
                     "Cold Water",
                     "Raw Mango Pulp",
@@ -123,6 +130,7 @@ class JuiceViewModel : ViewModel() {
                 ),
 
                 JuiceModel(
+                    8,
                     "Kokum Shorbot - page 1",
                     "Chilled Water",
                     "Kokum Syrup",
@@ -132,6 +140,7 @@ class JuiceViewModel : ViewModel() {
                 ),
 
                 JuiceModel(
+                    9,
                     "Watermelon Splash - page 1",
                     "Chilled Watermelon Juice",
                     "Mint",
@@ -141,6 +150,7 @@ class JuiceViewModel : ViewModel() {
                 ),
 
                 JuiceModel(
+                    10,
                     "Pineapple Ginger - page 1",
                     "Cold Water",
                     "Pineapple Juice",
@@ -155,6 +165,7 @@ class JuiceViewModel : ViewModel() {
         } else if(page == 2) {
             arrayListOf(
                 JuiceModel(
+                    11,
                     "Mint Lemonade - page 2",
                     "Chilled Soda",
                     "Mint Leaves",
@@ -163,6 +174,7 @@ class JuiceViewModel : ViewModel() {
                     "$35"
                 ),
                 JuiceModel(
+                    12,
                     "Tropical Mango - page 2",
                     "Mango Pulp",
                     "Coconut Water",
@@ -171,6 +183,7 @@ class JuiceViewModel : ViewModel() {
                     "$40"
                 ),
                 JuiceModel(
+                    13,
                     "Berry Blast - page 2",
                     "Mixed Berries",
                     "Yogurt",
@@ -179,6 +192,7 @@ class JuiceViewModel : ViewModel() {
                     "$45"
                 ),
                 JuiceModel(
+                    14,
                     "Watermelon Cooler - page 2",
                     "Watermelon",
                     "Mint",
@@ -187,6 +201,7 @@ class JuiceViewModel : ViewModel() {
                     "$30"
                 ),
                 JuiceModel(
+                    15,
                     "Pineapple Punch - page 2",
                     "Pineapple Juice",
                     "Orange Juice",
@@ -195,6 +210,7 @@ class JuiceViewModel : ViewModel() {
                     "$38"
                 ),
                 JuiceModel(
+                    16,
                     "Apple Ginger Fizz - page 2",
                     "Apple Juice",
                     "Ginger",
@@ -203,6 +219,7 @@ class JuiceViewModel : ViewModel() {
                     "$42"
                 ),
                 JuiceModel(
+                    17,
                     "Orange Carrot Zing - page 2",
                     "Orange Juice",
                     "Carrot Juice",
@@ -211,6 +228,7 @@ class JuiceViewModel : ViewModel() {
                     "$37"
                 ),
                 JuiceModel(
+                    18,
                     "Cucumber Mint - page 2",
                     "Cucumber",
                     "Mint",
@@ -219,6 +237,7 @@ class JuiceViewModel : ViewModel() {
                     "$33"
                 ),
                 JuiceModel(
+                    19,
                     "Kiwi Cooler - page 2",
                     "Kiwi",
                     "Lime",
@@ -227,6 +246,7 @@ class JuiceViewModel : ViewModel() {
                     "$39"
                 ),
                 JuiceModel(
+                    20,
                     "Lichi Splash - page 2",
                     "Lychee Juice",
                     "Mint",
@@ -241,6 +261,7 @@ class JuiceViewModel : ViewModel() {
             arrayListOf(
                 //////////////
                 JuiceModel(
+                    21,
                     "Pomegranate Fizz - page 3",
                     "Pomegranate Juice",
                     "Lemon Juice",
@@ -249,6 +270,7 @@ class JuiceViewModel : ViewModel() {
                     "$43"
                 ),
                 JuiceModel(
+                    22,
                     "Strawberry Shake - page 3",
                     "Strawberries",
                     "Milk",
@@ -257,6 +279,7 @@ class JuiceViewModel : ViewModel() {
                     "$50"
                 ),
                 JuiceModel(
+                    23,
                     "Banana Smoothie - page 3",
                     "Banana",
                     "Milk",
@@ -265,6 +288,7 @@ class JuiceViewModel : ViewModel() {
                     "$34"
                 ),
                 JuiceModel(
+                    24,
                     "Avocado Delight - page 3",
                     "Avocado",
                     "Milk",
@@ -273,6 +297,7 @@ class JuiceViewModel : ViewModel() {
                     "$55"
                 ),
                 JuiceModel(
+                    25,
                     "Green Detox - page 3",
                     "Spinach",
                     "Cucumber",
@@ -281,6 +306,7 @@ class JuiceViewModel : ViewModel() {
                     "$48"
                 ),
                 JuiceModel(
+                    26,
                     "Grapefruit Refresher - page 3",
                     "Grapefruit Juice",
                     "Mint",
@@ -289,6 +315,7 @@ class JuiceViewModel : ViewModel() {
                     "$41"
                 ),
                 JuiceModel(
+                    27,
                     "Peach Passion - page 3",
                     "Peach Juice",
                     "Lime",
@@ -297,6 +324,7 @@ class JuiceViewModel : ViewModel() {
                     "$39"
                 ),
                 JuiceModel(
+                    28,
                     "Coconut Crush - page 3",
                     "Coconut Water",
                     "Pineapple Juice",
@@ -305,6 +333,7 @@ class JuiceViewModel : ViewModel() {
                     "$44"
                 ),
                 JuiceModel(
+                    29,
                     "Blueberry Yogurt - page 3",
                     "Blueberries",
                     "Yogurt",
@@ -313,6 +342,7 @@ class JuiceViewModel : ViewModel() {
                     "$46"
                 ),
                 JuiceModel(
+                    30,
                     "Cherry Sparkle - page 3",
                     "Cherry Juice",
                     "Soda",
@@ -324,6 +354,7 @@ class JuiceViewModel : ViewModel() {
         } else if(page == 4) {
             arrayListOf(
                 JuiceModel(
+                    31,
                     "Banana Smoothie - page 4",
                     "Banana",
                     "Milk",
@@ -332,6 +363,7 @@ class JuiceViewModel : ViewModel() {
                     "$34"
                 ),
                 JuiceModel(
+                    32,
                     "Avocado Delight - page 4",
                     "Avocado",
                     "Milk",
