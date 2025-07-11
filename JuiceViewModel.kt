@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class JuiceViewModel : ViewModel() {
@@ -12,8 +12,14 @@ class JuiceViewModel : ViewModel() {
     private val _listJuice = MutableLiveData<List<JuiceModel>>()
     val listJuice: LiveData<List<JuiceModel>> get() = _listJuice
 
+
+    val isLoading = MutableLiveData<Boolean>()
+
+
+
+
 //    init {
-//        loadJuiceData()
+//        loadJuiceData(1)
 //    }
 
 
@@ -40,15 +46,17 @@ class JuiceViewModel : ViewModel() {
      */
 
     fun loadJuiceData(count: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            _listJuice.postValue(loadItems(count))
+
+        viewModelScope.launch{
+            isLoading.value = true
+            delay(3000)
+            _listJuice.value = loadItems(count)
         }
     }
 
     private fun loadItems(page: Int): ArrayList<JuiceModel> {
 
         return if(page == 1) {
-
             arrayListOf(
 
                 JuiceModel(

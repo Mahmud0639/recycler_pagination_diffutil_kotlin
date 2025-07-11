@@ -2,20 +2,24 @@ package com.manuni.hello_world.recyclerview
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.manuni.hello_world.databinding.ActivityRecyclerBinding
 import kotlinx.coroutines.launch
 
-class JuiceActivity:AppCompatActivity() {
-    private lateinit var binding : ActivityRecyclerBinding
+class JuiceActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRecyclerBinding
 
     private lateinit var juiceViewModel: JuiceViewModel
 
 
     private var tempPageNumber = 1
+    private val PER_PAGE_DATA = 10
 
     private lateinit var juiceAdapter: JuiceAdapter
     private val items: ArrayList<JuiceModel> = arrayListOf()
@@ -30,31 +34,73 @@ class JuiceActivity:AppCompatActivity() {
         juiceViewModel = ViewModelProvider(this)[JuiceViewModel::class.java]
 
 
-        juiceViewModel.loadJuiceData(tempPageNumber)
+        juiceViewModel.isLoading.observe(this) { loading ->
+            binding.swipeRefresh.isRefreshing = loading
+        }
 
-        juiceAdapter = JuiceAdapter(items)
-        binding.recyclerView.adapter = juiceAdapter
+        binding.swipeRefresh.post {
+            juiceViewModel.loadJuiceData(tempPageNumber)
+        }
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-
-        binding.recyclerView.setHasFixedSize(true)
-
-
-
-        lifecycleScope.launch {
-            juiceViewModel.listJuice.observe(this@JuiceActivity){ juiceItems ->
-                items.clear()
-                items.addAll(juiceItems)
-
-                juiceAdapter.notifyDataSetChanged()
-
-                binding.progressBar.visibility = View.GONE
-            }
+        binding.swipeRefresh.setOnRefreshListener {
+            tempPageNumber = 1
+            juiceViewModel.loadJuiceData(tempPageNumber)
         }
 
 
 
 
+        juiceAdapter = JuiceAdapter(items)
+        binding.recyclerView.adapter = juiceAdapter
+
+        binding.recyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        binding.recyclerView.setHasFixedSize(true)
+
+        binding.recyclerView.addOnScrollListener(object : OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (dy > 0) {
+                    //  binding.swipeRefresh.isRefreshing = true
+                    recyclerView.layoutManager?.let {
+                        val lm = it as LinearLayoutManager
+                        val totalCount = lm.itemCount
+
+                        if (!binding.swipeRefresh.isRefreshing && totalCount == lm.findLastVisibleItemPosition() + 1 && (totalCount % PER_PAGE_DATA) == 0) {
+                            tempPageNumber++
+
+                            Toast.makeText(
+                                this@JuiceActivity,
+                                "Page No. $tempPageNumber",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            juiceViewModel.loadJuiceData(tempPageNumber)
+                        }
+                    }
+                }
+
+
+            }
+        })
+
+        lifecycleScope.launch {
+
+
+            juiceViewModel.listJuice.observe(this@JuiceActivity) { juiceItems ->
+                if (tempPageNumber == 1) {
+                    items.clear()
+                }
+
+                items.addAll(juiceItems)
+
+                juiceAdapter.notifyDataSetChanged()
+                binding.progressBar.visibility = View.GONE
+                binding.swipeRefresh.isRefreshing = false
+            }
+        }
 
 
 //
