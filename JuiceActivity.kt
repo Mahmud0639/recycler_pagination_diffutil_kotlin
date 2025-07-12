@@ -1,6 +1,7 @@
 package com.manuni.hello_world.recyclerview
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,10 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.manuni.hello_world.databinding.ActivityRecyclerBinding
-import com.manuni.hello_world.recyclerview.interface_listeners.ItemClick
 import kotlinx.coroutines.launch
 
-class JuiceActivity : AppCompatActivity(),ItemClick {
+class JuiceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecyclerBinding
 
     private lateinit var juiceViewModel: JuiceViewModel
@@ -46,14 +46,15 @@ class JuiceActivity : AppCompatActivity(),ItemClick {
         binding.swipeRefresh.setOnRefreshListener {
             tempPageNumber = 1
             juiceViewModel.loadJuiceData(tempPageNumber)
+
+
         }
 
 
 
 
-        juiceAdapter = JuiceAdapter(items,this)
+        juiceAdapter = JuiceAdapter(items)
         binding.recyclerView.adapter = juiceAdapter
-
 
 
 //        juiceAdapter.setOnItemClickListener {
@@ -62,7 +63,7 @@ class JuiceActivity : AppCompatActivity(),ItemClick {
 //        }
 
         juiceAdapter.setOnUpdateClickListener {
-            Toast.makeText(this,"${it.id} update clicked.",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "${it.id} update clicked.", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -102,22 +103,35 @@ class JuiceActivity : AppCompatActivity(),ItemClick {
         lifecycleScope.launch {
 
 
-            juiceViewModel.listJuice.observe(this@JuiceActivity) { juiceItems ->
-                if (tempPageNumber == 1) {
-                    items.clear()
-                }
-
-//                items.addAll(juiceItems)
+//            juiceViewModel.listJuice.observe(this@JuiceActivity) { juiceItems ->
+//                if (tempPageNumber == 1) {
+//                    items.clear()
+//                }
 //
-//                juiceAdapter.notifyDataSetChanged()
+////                items.addAll(juiceItems)
+////
+////                juiceAdapter.notifyDataSetChanged()
+//
+//                val mItems = items.clone() as ArrayList<JuiceModel>
+//                mItems.addAll(juiceItems)
+//                juiceAdapter.updateJuiceItems(mItems)
+//
+//                binding.progressBar.visibility = View.GONE
+//                binding.swipeRefresh.isRefreshing = false
+//            }
 
-                val mItems = items.clone() as ArrayList<JuiceModel>
-                mItems.addAll(juiceItems)
-                juiceAdapter.updateJuiceItems(mItems)
+
+            juiceViewModel.listJuice.observe(this@JuiceActivity) { juiceItems ->
+
+
+                juiceAdapter.updateJuiceItems(juiceItems)
 
                 binding.progressBar.visibility = View.GONE
                 binding.swipeRefresh.isRefreshing = false
             }
+
+
+
         }
 
 
@@ -132,9 +146,9 @@ class JuiceActivity : AppCompatActivity(),ItemClick {
 
     }
 
-    override fun onItemClickListener(position: Int) {
-        Toast.makeText(this@JuiceActivity,"Clicked $position",Toast.LENGTH_SHORT).show()
-    }
+//    override fun onItemClickListener(position: Int) {
+//        Toast.makeText(this@JuiceActivity,"Clicked $position",Toast.LENGTH_SHORT).show()
+//    }
 
 //    private fun loadItems():ArrayList<JuiceModel>{
 //        return arrayListOf(

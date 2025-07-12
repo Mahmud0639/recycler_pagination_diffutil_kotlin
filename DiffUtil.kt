@@ -19,6 +19,8 @@ class JuiceDiffUtil(private var itemsOld: ArrayList<JuiceModel>, private var ite
         val itemOld:JuiceModel = itemsOld[oldItemPosition]
         val itemNew:JuiceModel = itemsNew[newItemPosition]
 
+       // return  itemOld == itemNew
+
         return itemOld.juiceName == itemNew.juiceName && itemOld.ingredientsOne == itemNew.ingredientsOne
                 && itemOld.ingredientsTwo == itemNew.ingredientsTwo && itemOld.ingredientsThree == itemNew.ingredientsThree
                 && itemOld.ingredientsFour == itemNew.ingredientsFour && itemOld.price == itemNew.price

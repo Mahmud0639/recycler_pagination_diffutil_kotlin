@@ -8,9 +8,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class JuiceViewModel : ViewModel() {
-
-    private val _listJuice = MutableLiveData<List<JuiceModel>>()
-    val listJuice: LiveData<List<JuiceModel>> get() = _listJuice
+    private var allItems = arrayListOf<JuiceModel>()
+    private val _listJuice = MutableLiveData<ArrayList<JuiceModel>>()
+    val listJuice: LiveData<ArrayList<JuiceModel>> get() = _listJuice
 
 
     val isLoading = MutableLiveData<Boolean>()
@@ -45,14 +45,24 @@ class JuiceViewModel : ViewModel() {
      *
      */
 
-    fun loadJuiceData(count: Int) {
+//    fun loadJuiceData(count: Int) {
+//
+//        viewModelScope.launch{
+//            isLoading.value = true
+//            delay(3000)
+//            _listJuice.value = loadItems(count)
+//        }
+//    }
 
-        viewModelScope.launch{
+    fun loadJuiceData(page: Int) {
+        viewModelScope.launch {
             isLoading.value = true
             delay(3000)
-            _listJuice.value = loadItems(count)
-        }
-    }
+            val newItems = loadItems(page)
+            if (page == 1) allItems.clear()
+            allItems.addAll(newItems)
+            _listJuice.value = allItems
+        }}
 
     private fun loadItems(page: Int): ArrayList<JuiceModel> {
 
@@ -166,12 +176,12 @@ class JuiceViewModel : ViewModel() {
             arrayListOf(
                 JuiceModel(
                     11,
-                    "Mint Lemonade - page 2",
-                    "Chilled Soda",
-                    "Mint Leaves",
-                    "Black Salt",
-                    "Lemon",
-                    "$35"
+                    "Salad pop - page 2",
+                    "pip test",
+                    "cold tots",
+                    "tim lel",
+                    "kol",
+                    "$38"
                 ),
                 JuiceModel(
                     12,

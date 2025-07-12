@@ -1,15 +1,16 @@
 package com.manuni.hello_world.recyclerview
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.manuni.hello_world.databinding.JuiceItemsBinding
-import com.manuni.hello_world.recyclerview.interface_listeners.ItemClick
 
 
-class JuiceAdapter(var items: ArrayList<JuiceModel>,private val itemListener: ItemClick):RecyclerView.Adapter<JuiceAdapter.JuiceViewHolder>() {
+class JuiceAdapter(var items: ArrayList<JuiceModel>):RecyclerView.Adapter<JuiceAdapter.JuiceViewHolder>() {
 
     private lateinit var onItemClick: ((JuiceModel)->Unit)
 
@@ -37,13 +38,15 @@ class JuiceAdapter(var items: ArrayList<JuiceModel>,private val itemListener: It
         val item = items[position]
         val binding = holder.binding
 
+
         binding.juiceName.text = item.juiceName
         binding.ingredients.text = item.ingredientsOne + item.ingredientsTwo + item.ingredientsThree + item.ingredientsFour
         binding.price.text = item.price
     }
 
     fun updateJuiceItems(newItems: ArrayList<JuiceModel>){
-        val juiceDiff = JuiceDiffUtil(this.items,newItems)
+        val oldItems = ArrayList(this.items)
+        val juiceDiff = JuiceDiffUtil(oldItems,newItems)
         val diffResult = DiffUtil.calculateDiff(juiceDiff)
         this.items.clear()
         this.items.addAll(newItems)
@@ -59,12 +62,12 @@ class JuiceAdapter(var items: ArrayList<JuiceModel>,private val itemListener: It
 //            }
 
             binding.update.setOnClickListener {
-                onUpdateClick(items[adapterPosition])
+                onUpdateClick(items[adapterPosition])//ekhane amra JuiceModel object pathassi tai items[adapterPosition]) use koresi
             }
 
-            binding.root.setOnClickListener{
-                itemListener.onItemClickListener(adapterPosition)
-            }
+//            binding.root.setOnClickListener{
+//                itemListener.onItemClickListener(adapterPosition)//ekhane int pathassi tai only adapterPosition
+//            }
 
         }
     }
