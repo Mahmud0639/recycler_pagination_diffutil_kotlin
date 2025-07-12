@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.manuni.hello_world.databinding.ActivityRecyclerBinding
+import com.manuni.hello_world.recyclerview.interface_listeners.ItemClick
 import kotlinx.coroutines.launch
 
-class JuiceActivity : AppCompatActivity() {
+class JuiceActivity : AppCompatActivity(),ItemClick {
     private lateinit var binding: ActivityRecyclerBinding
 
     private lateinit var juiceViewModel: JuiceViewModel
@@ -50,8 +51,20 @@ class JuiceActivity : AppCompatActivity() {
 
 
 
-        juiceAdapter = JuiceAdapter(items)
+        juiceAdapter = JuiceAdapter(items,this)
         binding.recyclerView.adapter = juiceAdapter
+
+
+
+//        juiceAdapter.setOnItemClickListener {
+//            //here we will get "it" that means JuiceModel class object
+//            Toast.makeText(this,"${it.juiceName} clicked.",Toast.LENGTH_SHORT).show()
+//        }
+
+        juiceAdapter.setOnUpdateClickListener {
+            Toast.makeText(this,"${it.id} update clicked.",Toast.LENGTH_SHORT).show()
+        }
+
 
         binding.recyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -117,6 +130,10 @@ class JuiceActivity : AppCompatActivity() {
 //            Toast.makeText(this,"${it.juiceName}",Toast.LENGTH_SHORT).show()
 //        }
 
+    }
+
+    override fun onItemClickListener(position: Int) {
+        Toast.makeText(this@JuiceActivity,"Clicked $position",Toast.LENGTH_SHORT).show()
     }
 
 //    private fun loadItems():ArrayList<JuiceModel>{
@@ -376,4 +393,6 @@ class JuiceActivity : AppCompatActivity() {
 //
 //
 //    }
+
+    //E:\android_projects\app\src\main\java\com\manuni\hello_world\recyclerview>
 }

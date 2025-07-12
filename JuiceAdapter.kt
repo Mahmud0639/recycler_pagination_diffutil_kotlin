@@ -6,10 +6,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.manuni.hello_world.databinding.JuiceItemsBinding
+import com.manuni.hello_world.recyclerview.interface_listeners.ItemClick
 
 
-class JuiceAdapter(var items: ArrayList<JuiceModel>):RecyclerView.Adapter<JuiceAdapter.JuiceViewHolder>() {
+class JuiceAdapter(var items: ArrayList<JuiceModel>,private val itemListener: ItemClick):RecyclerView.Adapter<JuiceAdapter.JuiceViewHolder>() {
 
+    private lateinit var onItemClick: ((JuiceModel)->Unit)
+
+    private lateinit var onUpdateClick: (JuiceModel)->Unit
+
+    fun setOnItemClickListener(action: (JuiceModel)->Unit){
+        onItemClick = action
+    }
+
+    fun setOnUpdateClickListener(action: (JuiceModel) -> Unit){
+        onUpdateClick = action
+    }
 
     override fun getItemCount(): Int {
         return items.size
@@ -41,6 +53,19 @@ class JuiceAdapter(var items: ArrayList<JuiceModel>):RecyclerView.Adapter<JuiceA
 
     inner class JuiceViewHolder(var binding: JuiceItemsBinding):ViewHolder(binding.root){
         //click listener type of work
+        init {
+//            binding.root.setOnClickListener {
+//                onItemClick(items[adapterPosition])
+//            }
 
+            binding.update.setOnClickListener {
+                onUpdateClick(items[adapterPosition])
+            }
+
+            binding.root.setOnClickListener{
+                itemListener.onItemClickListener(adapterPosition)
+            }
+
+        }
     }
 }
